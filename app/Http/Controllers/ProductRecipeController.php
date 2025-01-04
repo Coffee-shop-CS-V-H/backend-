@@ -64,4 +64,22 @@ class ProductRecipeController extends Controller
     {
         $this->show($product, $material)->delete();
     }
+
+    public function ingredientsOfProduct()
+    {
+        // Képzeld el, hogy egy receptet keresel, és szeretnéd megkapni az alapanyagokat és a késztermékeket:
+        $recept = ProductRecipe::with(['ingredients', 'finishedProduct'])->get();
+
+        foreach ($recept as $item) {
+            // Az alapanyagok
+            if ($item->ingredients()) {
+                echo "Alapanyag neve: " . $item->alapanyag->elnevezés . "\n"; // Az alapanyag neve
+            }
+
+            // A késztermékek
+            if ($item->finishedProduct) {
+                echo "Késztermék neve: " . $item->kesztermek->elnevezés . "\n"; // A késztermék neve
+            }
+        }
+    }
 }

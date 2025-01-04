@@ -31,4 +31,16 @@ class ProductRecipe extends Model
     {
         return $this->belongsTo(Product::class, 'material');
     }
+
+    public function ingredients()
+    {
+        return $this->belongsTo(Product::class, 'material', 'product_id') 
+            ->where('type', 'I'); 
+    }
+
+    public function finishedProduct()
+    {
+        return $this->belongsTo(Product::class, 'product', 'product_id') 
+            ->where('type', 'F'); 
+    }
 }
