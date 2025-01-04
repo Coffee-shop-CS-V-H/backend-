@@ -35,10 +35,10 @@ class ContentController extends Controller
         $this->show($cup_id, $product_id)->delete();
     }
 
-    public function cupContent()
+    public function contentsOfCup()
     {
-        return $this->belongsTo(ProductRecipe::class, 'product_id', 'product')
-            ->where('productrecipe.product', $this->product_id)
-            ->orWhere('productrecipe.material', $this->product_id);
+        $content = Content::with('product', 'productRecipe') // Betöltjük a terméket és a receptet
+            ->orderBy('cup_id')
+            ->get();
     }
 }

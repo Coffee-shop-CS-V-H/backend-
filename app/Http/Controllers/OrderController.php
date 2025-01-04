@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -51,4 +52,18 @@ class OrderController extends Controller
 
         $record->delete();
     }
+
+    public function monthlyIncome()
+    {
+        // Lekérdezzük az éves bevételt hónapokra bontva
+        $bevetel = Order::select(
+                DB::raw('YEAR(dátum) as ev'),
+                DB::raw('MONTH(dátum) as honap'),
+                DB::raw('SUM(végösszeg) as havi_bevetel')
+            )
+            ->whereYear('dátum', now()->year) // Csak az aktuális év
+            ->groupBy(DB::raw('YEAR(dátum), MONTH(dátum)'))
+            ->orderBy(DB::raw('MONTH(dátum)')) // Hónapok szerint növekvő sorrend
+            ->get();
+        }
 }

@@ -35,4 +35,9 @@ class Content extends Model
     {
         return $this->belongsTo(Product::class, 'product_id', 'product_id');
     }
+
+    public function productRecipe()
+    {
+        return $this->belongsTo(ProductRecipe::class, 'product_id', 'material');
+    }
 }

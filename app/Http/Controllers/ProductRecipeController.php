@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Content;
 use App\Models\ProductRecipe;
 use Illuminate\Http\Request;
 
@@ -69,17 +71,5 @@ class ProductRecipeController extends Controller
     {
         // Képzeld el, hogy egy receptet keresel, és szeretnéd megkapni az alapanyagokat és a késztermékeket:
         $recipe = ProductRecipe::with(['ingredients', 'finishedProduct'])->get();
-
-        foreach ($recipe as $item) {
-            // Az alapanyagok
-            if ($item->ingredients()) {
-                echo "Alapanyag neve: " . $item->alapanyag->elnevezés . "\n"; // Az alapanyag neve
-            }
-
-            // A késztermékek
-            if ($item->finishedProduct) {
-                echo "Késztermék neve: " . $item->kesztermek->elnevezés . "\n"; // A késztermék neve
-            }
-        }
     }
 }
