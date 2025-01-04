@@ -68,9 +68,9 @@ class ProductRecipeController extends Controller
     public function ingredientsOfProduct()
     {
         // Képzeld el, hogy egy receptet keresel, és szeretnéd megkapni az alapanyagokat és a késztermékeket:
-        $recept = ProductRecipe::with(['ingredients', 'finishedProduct'])->get();
+        $recipe = ProductRecipe::with(['ingredients', 'finishedProduct'])->get();
 
-        foreach ($recept as $item) {
+        foreach ($recipe as $item) {
             // Az alapanyagok
             if ($item->ingredients()) {
                 echo "Alapanyag neve: " . $item->alapanyag->elnevezés . "\n"; // Az alapanyag neve

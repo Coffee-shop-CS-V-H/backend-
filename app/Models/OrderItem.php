@@ -9,7 +9,7 @@ class OrderItem extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderItemFactory> */
     use HasFactory;
-    protected $table = 'orderItems'; 
+    //protected $table = 'orderItems'; 
     protected $primaryKey = 'cup_id';
     
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('cup_id');  // Automatikusan növekvő elsődleges kulcs
             $table->unsignedBigInteger('order_id');  // Külső kulcs a 'orders' táblához
             $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('cascade');
-            $table->decimal('item_price', 10, 2)->default(0);
+            $table->decimal('item_price', 10, 2)->default(0.00);
             $table->timestamps();
         });
         
