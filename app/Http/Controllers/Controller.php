@@ -41,4 +41,32 @@ class Controller
     public function destroy($id){
         User::find($id)->delete();
     }
+
+    public function usersByType(){
+        $users = User::orderBy('profil_tipus')
+    ->orderBy('nev')
+    ->get(['nev', 'email', 'profil_tipus']);
+
+    }
+
+
+    public function getUserOrders($userId)
+{
+    $user = User::find($userId);
+
+    if (!$user) {
+        return response()->json(['error' => 'User not find'], 404);
+    }
+
+    
+    $orders = $user->userToOrders()
+        ->orderBy('created_at', 'desc') 
+        ->get(['order_number', 'total_price', 'status', 'created_at']);
+
+    return response()->json([
+        'user' => $user->name,
+        'orders' => $orders
+    ]);
+}
+
 }

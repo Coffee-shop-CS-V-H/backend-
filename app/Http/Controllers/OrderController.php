@@ -57,13 +57,33 @@ class OrderController extends Controller
     {
         // Lekérdezzük az éves bevételt hónapokra bontva
         $bevetel = Order::select(
-                DB::raw('YEAR(dátum) as ev'),
-                DB::raw('MONTH(dátum) as honap'),
-                DB::raw('SUM(végösszeg) as havi_bevetel')
-            )
+            DB::raw('YEAR(dátum) as ev'),
+            DB::raw('MONTH(dátum) as honap'),
+            DB::raw('SUM(végösszeg) as havi_bevetel')
+        )
             ->whereYear('dátum', now()->year) // Csak az aktuális év
             ->groupBy(DB::raw('YEAR(dátum), MONTH(dátum)'))
             ->orderBy(DB::raw('MONTH(dátum)')) // Hónapok szerint növekvő sorrend
             ->get();
+    }
+
+
+    public function getOrdersByStatus(Request $request)
+    {
+        // Lekérdezés paraméterként kapott státusz alapján
+        $status = $request->query('status', 'Processing'); 
+
+        
+        $validStatuses = ['Received', 'Processing', 'Ready', 'Released', 'Archive'];
+        if (!in_array($status, $validStatuses)) {
+            return response()->json(['error' => 'Not fund status'], 400);
         }
+
+        
+        $orders = Order::where('status', $status)
+            ->orderBy('created_at', 'asc') // Legújabb rendelések előre
+            ->get(['order_number', 'user_id', 'total_price', 'status', 'created_at']);
+
+        return response()->json($orders);
+    }
 }

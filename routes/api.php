@@ -46,4 +46,10 @@ Route::post('/order_items', [OrderItemController::class, 'store']);
 Route::put('/order_items/{order_id}', [OrderItemController::class, 'update']); 
 Route::delete('/order_items/{order_id}', [OrderItemController::class, 'destroy']);  
 
+// függvények routjai:
+
+Route::get('/users/by-type', [Controller::class, 'usersByType']);
+Route::get('/products/by-type', [ProductController::class, 'getProductsByType']);
+Route::get('/users/{id}/orders', [Controller::class, 'getUserOrders']);
+Route::get('/orders/by-status', [OrderController::class, 'getOrdersByStatus']);
 
