@@ -30,9 +30,9 @@ Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
 Route::get('/product-recipes', [ProductRecipeController::class, 'index']);
 Route::post('/product-recipes', [ProductRecipeController::class, 'store']);
-Route::get('/product-recipes/{product}/{material}', [ProductRecipeController::class, 'show']);
-Route::put('/product-recipes/{product}/{material}', [ProductRecipeController::class, 'update']);
-Route::delete('/product-recipes/{product}/{material}', [ProductRecipeController::class, 'destroy']);
+Route::get('/product-recipes/{product}/{ingredient}', [ProductRecipeController::class, 'show']);
+Route::put('/product-recipes/{product}/{ingredient}', [ProductRecipeController::class, 'update']);
+Route::delete('/product-recipes/{product}/{ingredient}', [ProductRecipeController::class, 'destroy']);
 
 Route::get('/users', [Controller::class, 'index']);  
 Route::get('/users/{id}', [Controller::class, 'show']); 
