@@ -43,9 +43,9 @@ class Controller
     }
 
     public function usersByType(){
-        $users = User::orderBy('profil_tipus')
-    ->orderBy('nev')
-    ->get(['nev', 'email', 'profil_tipus']);
+        $users = User::orderBy('profil_type')
+    ->orderBy('name')
+    ->get(['name', 'email', 'profil_type']);
 
     }
 

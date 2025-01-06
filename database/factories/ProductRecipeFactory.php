@@ -2,22 +2,29 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product_recipe>
- */
 class ProductRecipeFactory extends Factory
 {
     /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = \App\Models\ProductRecipe::class;
+
+    /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return array
      */
-    public function definition(): array
+    public function definition()
     {
         return [
-            //
+            'product' => Product::factory(), 
+            'material' => Product::factory(), 
+            'quantity' => $this->faker->numberBetween(1, 10),
         ];
     }
 }
