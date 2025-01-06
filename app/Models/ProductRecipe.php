@@ -10,12 +10,12 @@ class ProductRecipe extends Model
     use HasFactory;
 
     // Összetett elsődleges kulcs
-    protected $primaryKey = ['product', 'material'];
+    protected $primaryKey = ['product', 'ingredient'];
     public $incrementing = false;
 
     protected $fillable = [
         'product',
-        'material',
+        'ingredient',
         'quantity',
     ];
 
@@ -27,14 +27,14 @@ class ProductRecipe extends Model
         return $this->belongsTo(Product::class, 'product');
     }
 
-    public function material()
+    public function ingredient()
     {
-        return $this->belongsTo(Product::class, 'material');
+        return $this->belongsTo(Product::class, 'ingredient');
     }
 
     public function ingredients()
     {
-        return $this->belongsTo(Product::class, 'material', 'product_id') 
+        return $this->belongsTo(Product::class, 'ingredient', 'product_id') 
             ->where('type', 'I'); 
     }
 

@@ -23,7 +23,7 @@ class ProductRecipeController extends Controller
     {
         $validatedData = $request->validate([
             'product' => 'required|exists:products,product_id',
-            'material' => 'required|exists:products,product_id',
+            'ingredient' => 'required|exists:products,product_id',
             'quantity' => 'required|integer|min:1',
         ]);
 
@@ -35,10 +35,10 @@ class ProductRecipeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($product, $material)
+    public function show($product, $ingredient)
     {
         $productRecipe = ProductRecipe::where('product', $product)
-            ->where('material', $material)
+            ->where('ingredient', $ingredient)
             ->firstOrFail();
 
         return $productRecipe;
@@ -47,9 +47,9 @@ class ProductRecipeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $product, $material)
+    public function update(Request $request, $product, $ingredient)
     {
-        $record = $this->show($product, $material);
+        $record = $this->show($product, $ingredient);
 
         $validatedData = $request->validate([
             'quantity' => 'sometimes|integer|min:1',
@@ -62,9 +62,9 @@ class ProductRecipeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($product, $material)
+    public function destroy($product, $ingredient)
     {
-        $this->show($product, $material)->delete();
+        $this->show($product, $ingredient)->delete();
     }
 
     public function ingredientsOfProduct()

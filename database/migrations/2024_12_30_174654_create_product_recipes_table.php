@@ -11,16 +11,16 @@ return new class extends Migration
         {
             Schema::create('product_recipes', function (Blueprint $table) {
                 $table->unsignedBigInteger('product');
-                $table->unsignedBigInteger('material'); 
+                $table->unsignedBigInteger('ingredient'); 
                 $table->integer('quantity');
                 $table->timestamps();
             
                 // Összetett kulcs
-                $table->primary(['product', 'material']);
+                $table->primary(['product', 'ingredient']);
             
                 // Külső kulcsok
                 $table->foreign('product')->references('product_id')->on('products')->onDelete('cascade');
-                $table->foreign('material')->references('product_id')->on('products')->onDelete('cascade');
+                $table->foreign('ingredient')->references('product_id')->on('products')->onDelete('cascade');
             });
             
         }

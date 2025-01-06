@@ -23,7 +23,7 @@ class ProductRecipeFactory extends Factory
     {
         return [
             'product' => Product::factory(), 
-            'material' => Product::factory(), 
+            'ingredient' => Product::factory(), 
             'quantity' => $this->faker->numberBetween(1, 10),
         ];
     }
